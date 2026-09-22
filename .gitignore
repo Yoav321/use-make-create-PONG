@@ -1,0 +1,13 @@
+/venv
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info
+ 
+# pygbag build output and web-unfriendly audio formats
+*.wav
+*.mp3
+*-pygbag.*
+/build
+/dist
