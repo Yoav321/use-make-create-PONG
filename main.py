@@ -20,7 +20,7 @@ async def main():
 
     LEFT_PADDLE_DIMENSIONS: tuple = (15, 100)
     LEFT_PADDLE_OFFSET: int = 30 # distance from left edge of screen
-    LEFT_PADDLE_COLOR: tuple = (150, 150, 175)
+    LEFT_PADDLE_COLOR: tuple = (255, 255, 255)
     left_paddle: pygame.Rect = pygame.Rect(LEFT_PADDLE_OFFSET,
                                         SCREEN_DIMENSIONS[1] // 2 - LEFT_PADDLE_DIMENSIONS[1] // 2,
                                         LEFT_PADDLE_DIMENSIONS[0], LEFT_PADDLE_DIMENSIONS[1])
@@ -43,10 +43,10 @@ async def main():
         # check for top wall boundary
         if ball_location[1] - BALL_RADIUS <= 0:
             ball_speed[1] *= -1
-        # Bottom bounce
+        # Check for bottom wall boundary
         if ball_location[1] + BALL_RADIUS >= SCREEN_DIMENSIONS[1]:
             ball_speed[1] *= -1
-        # Right wall bounce
+        # Check for right wall boundary
         if ball_location[0] + BALL_RADIUS >= SCREEN_DIMENSIONS[0]:
             ball_speed[0] *= -1
 
