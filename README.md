@@ -51,3 +51,5 @@ X refers to the issue number it closes, and it will auto-close the issue when it
 - The line `asyncio.run(main())` must be at the bottom of the code and nothing else must follow it.
 - Any sound must be in `.ogg` format
 - Any images must be in `.png`, `.jpg`, or `.webp` format.
+
+# Press the w and s keys to move the paddle up and down 
