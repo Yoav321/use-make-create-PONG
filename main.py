@@ -15,7 +15,7 @@ async def main():
 
     BALL_RADIUS: int = 10
     BALL_COLOR: tuple = (255, 255, 255)
-    ball_speed: list[int] = [-4, -6]
+    ball_speed: list[int] = [4, -6]
     ball_location: list[int] = [SCREEN_DIMENSIONS[0] // 2, SCREEN_DIMENSIONS[1] // 2]
 
     LEFT_PADDLE_DIMENSIONS: tuple = (15, 100)
@@ -59,7 +59,7 @@ async def main():
             ball_speed[0] *= -1
 
         # Check for right paddle
-
+    
 
 
 
