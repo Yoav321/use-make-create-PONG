@@ -45,7 +45,7 @@ async def main():
         if pressed[pygame.K_w] and left_paddle.top >= 0:
             left_paddle.top -= LEFT_PADDLE_SPEED
         
-        if pressed[pygame.K_s] and left_paddle.top <= SCREEN_DIMENSIONS[1]:
+        if pressed[pygame.K_s] and left_paddle.bottom <= SCREEN_DIMENSIONS[1]:
             left_paddle.top += LEFT_PADDLE_SPEED        
         
 
@@ -59,9 +59,15 @@ async def main():
         # Check for right wall boundary
         if ball_location[0] + BALL_RADIUS >= SCREEN_DIMENSIONS[0]:
             ball_speed[0] *= -1
+        # Check for paddle boundary
+        if ball_location[0] - BALL_RADIUS <= left_paddle.right and \
+        ball_location[1] - BALL_RADIUS>= left_paddle.top and \
+        ball_location[1] + BALL_RADIUS <= left_paddle.bottom:
+            ball_speed[0] *= -1   
 
         ball_location[0] += ball_speed[0]
         ball_location[1] += ball_speed[1]
+
 
         # DRAW
         screen.fill(BG_COLOR) # background
