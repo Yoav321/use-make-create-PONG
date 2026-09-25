@@ -1,7 +1,7 @@
 """
 Starter code for a simple Pygame Pong game that will be finished and exported to the web
 using the pygbag library.
-First Last - Month Year
+Yoav Bierkatz - September 2026
 """
 
 import asyncio
@@ -25,6 +25,14 @@ async def main():
     left_paddle: pygame.Rect = pygame.Rect(LEFT_PADDLE_OFFSET,
                                         SCREEN_DIMENSIONS[1] // 2 - LEFT_PADDLE_DIMENSIONS[1] // 2,
                                         LEFT_PADDLE_DIMENSIONS[0], LEFT_PADDLE_DIMENSIONS[1])
+    RIGHT_PADDLE_DIMENSIONS: tuple = (15, 100)
+    RIGHT_PADDLE_OFFSET: int = 770
+    RIGHT_PADDLE_COLOR: tuple = (255,255,255)
+    RIGHT_PADDLE_SPEED: float = 8
+    right_paddle: pygame.Rect = pygame.Rect(RIGHT_PADDLE_OFFSET,
+                                            SCREEN_DIMENSIONS[1] // 2 - RIGHT_PADDLE_DIMENSIONS[1] // 2,
+                                            RIGHT_PADDLE_DIMENSIONS[0], RIGHT_PADDLE_DIMENSIONS[1])
+
 
 
     BG_COLOR: tuple = (0, 0, 0)
@@ -46,8 +54,13 @@ async def main():
             left_paddle.top -= LEFT_PADDLE_SPEED
         
         if pressed[pygame.K_s] and left_paddle.bottom <= SCREEN_DIMENSIONS[1]:
-            left_paddle.top += LEFT_PADDLE_SPEED        
+            left_paddle.top += LEFT_PADDLE_SPEED       
+
+        if pressed[pygame.K_UP] and right_paddle.top >= 0:
+            right_paddle.top -= RIGHT_PADDLE_SPEED
         
+        if pressed[pygame.K_DOWN] and right_paddle.bottom <= SCREEN_DIMENSIONS[1]:
+            right_paddle.top += RIGHT_PADDLE_SPEED           
 
         # update the ball
         # check for top wall boundary  
@@ -59,7 +72,8 @@ async def main():
             ball_speed[0] *= -1
 
         # Check for right paddle
-    
+        if check_ball_paddle_collision(ball_location, BALL_RADIUS, right_paddle):
+            ball_speed[0] *= -1    
 
 
 
@@ -70,6 +84,7 @@ async def main():
         # DRAW
         screen.fill(BG_COLOR) # background
         pygame.draw.rect(screen, LEFT_PADDLE_COLOR, left_paddle) # paddle
+        pygame.draw.rect(screen, RIGHT_PADDLE_COLOR, right_paddle)
         pygame.draw.circle(screen, BALL_COLOR, ball_location, BALL_RADIUS) # ball
 
         pygame.display.flip() # update screen
@@ -126,8 +141,8 @@ def check_ball_paddle_collision(ball_location: list[float],
         return True
     
     #check right edge of ball hitting paddle
-    if ball_location[0] + ball_radius >= paddle.right and\
-        ball_location[0] + ball_radius <= paddle.left and\
+    if ball_location[0] + ball_radius >= paddle.left and\
+        ball_location[0] + ball_radius <= paddle.right and\
         ball_location[1] + ball_radius >= paddle.top and\
         ball_location[1] - ball_radius <= paddle.bottom:
         return True
